@@ -55,7 +55,7 @@
 					>
 						Pathful
 					</a>
-					— 3 years building career readiness and development tools for the industry leading K-16 education.
+					— 3 years building career readiness and development tools for the industry leading K-16 education platform.
 				</p>
 			</div>
 		</section>
