@@ -24,7 +24,8 @@
 			url: `${releaseBase}/${macInstaller}`,
 			meta: 'macOS 11+ · Intel + Apple Silicon · 12.5 MB',
 			hash: '4156ec0a307ccae9738619385a09bc37102361191d6e20d87d45c2ec1c4ec269',
-			primary: false
+			primary: false,
+			beta: true
 		}
 	];
 
@@ -44,7 +45,7 @@
 	<title>dashboard-me | David Jennings</title>
 	<meta
 		name="description"
-		content="dashboard-me is a customizable Windows and macOS dashboard for weather, media, football, notes, links and app shortcuts."
+		content="dashboard-me is a customizable Windows dashboard with a beta macOS build for weather, media, football, notes, links and app shortcuts."
 	/>
 </svelte:head>
 
@@ -67,7 +68,7 @@
 			/>
 			<div>
 				<p class="text-xs font-medium tracking-wider text-amber-400 uppercase">
-					Windows + macOS desktop app
+					Windows + macOS (Beta) desktop app
 				</p>
 				<h1 class="mt-1 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
 					dashboard-me
@@ -90,7 +91,16 @@
 					>
 						{download.label}
 					</a>
-					<p class="mt-3 text-xs text-zinc-500">{download.meta}</p>
+					<div class="mt-3 flex items-center justify-between gap-2">
+						<p class="text-xs text-zinc-500">{download.meta}</p>
+						{#if download.beta}
+							<span
+								class="shrink-0 rounded-full border border-amber-500/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold tracking-wider text-amber-400 uppercase"
+							>
+								Beta
+							</span>
+						{/if}
+					</div>
 					<p class="mt-1 text-xs break-all text-zinc-600">{download.file}</p>
 				</div>
 			{/each}
@@ -157,7 +167,7 @@
 				installer downloads it if it is missing, so the first install needs an internet connection.
 			</p>
 
-			<h3 class="mt-8 text-sm font-semibold text-white">macOS</h3>
+			<h3 class="mt-8 text-sm font-semibold text-white">macOS (Beta)</h3>
 			<ol class="mt-3 list-decimal space-y-2 pl-5 text-sm text-zinc-300">
 				<li>Download <code class="text-zinc-100">{macInstaller}</code> and open it.</li>
 				<li>Drag <strong class="text-white">dashboard-me</strong> to Applications.</li>
