@@ -1,0 +1,186 @@
+<script lang="ts">
+	const version = '1.1.2';
+	const installer = 'dashboard-me_1.1.2_x64-setup.exe';
+	const downloadUrl = `https://github.com/Davi1999/davi1999.github.io/releases/download/dashboard-me-v${version}/${installer}`;
+	const releaseUrl = `https://github.com/Davi1999/davi1999.github.io/releases/tag/dashboard-me-v${version}`;
+	const checksum = '7f29378f55962c40f30f39e75faefc9a11e0b5bbe42a4d82f93b168380dfddb9';
+
+	const features = [
+		'Weather with hourly and daily forecasts, powered by Open-Meteo',
+		'Now Playing with Windows media session artwork and playback controls',
+		'Football scores and league tables through SportScore or 5DollarFootballAPI',
+		'World Clock for any city, Quick Links, and app shortcuts with real Windows icons',
+		'An editable notes widget and a looping YouTube video player',
+		'Draggable, resizable layout with saved themes, background images and per-widget settings'
+	];
+
+	const stack = ['Tauri 2', 'Rust', 'React 19', 'TypeScript', 'Tailwind CSS', 'Vite'];
+</script>
+
+<svelte:head>
+	<title>dashboard-me | David Jennings</title>
+	<meta
+		name="description"
+		content="dashboard-me is a customizable Windows dashboard for weather, media, football, notes, links and app shortcuts."
+	/>
+</svelte:head>
+
+<main class="min-h-screen bg-zinc-950 font-sans text-zinc-100">
+	<div class="mx-auto max-w-3xl px-6 py-16 sm:py-24">
+		<a
+			href="/"
+			class="text-sm text-zinc-400 underline decoration-zinc-700 underline-offset-4 transition hover:text-white hover:decoration-zinc-400"
+		>
+			← David Jennings
+		</a>
+
+		<header class="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
+			<img
+				src="/images/dashboard-me-icon.png"
+				alt="dashboard-me app icon"
+				class="h-20 w-20 rounded-2xl shadow-lg shadow-black/40"
+				width="80"
+				height="80"
+			/>
+			<div>
+				<p class="text-xs font-medium tracking-wider text-amber-400 uppercase">
+					Windows desktop app
+				</p>
+				<h1 class="mt-1 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+					dashboard-me
+				</h1>
+				<p class="mt-2 max-w-xl text-zinc-400">
+					A customizable dashboard for the things you check every day: weather, media, football,
+					time zones, notes, links and app shortcuts.
+				</p>
+			</div>
+		</header>
+
+		<div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+			<a
+				href={downloadUrl}
+				class="inline-flex items-center justify-center rounded-lg bg-amber-400 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-amber-300"
+			>
+				Download for Windows
+			</a>
+			<p class="text-sm text-zinc-500">
+				v{version} · Windows 10/11 64-bit · 3.8 MB
+			</p>
+		</div>
+
+		<figure class="mt-10">
+			<img
+				src="/images/dashboard-me.jpg"
+				alt="dashboard-me showing weather, now playing, football, world clock, notes, quick links and app shortcuts"
+				class="w-full rounded-xl border border-zinc-800 shadow-2xl shadow-black/50"
+				width="1600"
+				height="965"
+				loading="lazy"
+			/>
+			<figcaption class="mt-3 text-xs text-zinc-500">
+				Dashboard with the Midnight theme. Widgets can be moved, resized and configured.
+			</figcaption>
+		</figure>
+
+		<section class="mt-14" aria-labelledby="features-heading">
+			<h2 id="features-heading" class="text-sm font-medium tracking-wider text-zinc-500 uppercase">
+				What it does
+			</h2>
+			<ul class="mt-4 grid gap-2 text-sm text-zinc-300 sm:grid-cols-2" role="list">
+				{#each features as feature}
+					<li class="flex gap-2">
+						<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400"></span>
+						{feature}
+					</li>
+				{/each}
+			</ul>
+		</section>
+
+		<section class="mt-14" aria-labelledby="install-heading">
+			<h2 id="install-heading" class="text-sm font-medium tracking-wider text-zinc-500 uppercase">
+				Install
+			</h2>
+			<ol class="mt-4 list-decimal space-y-2 pl-5 text-sm text-zinc-300">
+				<li>Download <code class="text-zinc-100">{installer}</code>.</li>
+				<li>
+					Run the installer. It installs for the current Windows user and does not need
+					administrator rights.
+				</li>
+				<li>
+					If Windows SmartScreen appears, choose <strong class="text-white">More info</strong>
+					then <strong class="text-white">Run anyway</strong>. The installer is not code-signed.
+				</li>
+				<li>
+					The app opens its first-run setup for name, theme, weather location and football
+					preferences.
+				</li>
+			</ol>
+			<p class="mt-4 text-sm text-zinc-400">
+				dashboard-me uses Microsoft Edge WebView2. Windows 11 and current Windows 10 include it; the
+				installer downloads it if it is missing, so the first install needs an internet connection.
+			</p>
+		</section>
+
+		<section class="mt-14" aria-labelledby="data-heading">
+			<h2 id="data-heading" class="text-sm font-medium tracking-wider text-zinc-500 uppercase">
+				Your data
+			</h2>
+			<p class="mt-4 text-sm text-zinc-400">
+				There is no account and no telemetry. Layout, theme, notes and widget settings are stored
+				locally under <code class="text-zinc-200">%APPDATA%\com.davi1999.dashboardme</code>. An
+				optional 5DollarFootballAPI key is kept in Windows Credential Manager, not in the dashboard
+				file.
+			</p>
+			<p class="mt-3 text-sm text-zinc-400">
+				Weather, football, quotes and YouTube playback require an internet connection. The app is
+				built from a private source repository; this page distributes the compiled installer only.
+			</p>
+		</section>
+
+		<section class="mt-14" aria-labelledby="stack-heading">
+			<h2 id="stack-heading" class="text-sm font-medium tracking-wider text-zinc-500 uppercase">
+				Built with
+			</h2>
+			<ul class="mt-4 flex flex-wrap gap-2" role="list">
+				{#each stack as item}
+					<li>
+						<span
+							class="inline-block rounded-md border border-zinc-700 bg-zinc-900 px-3 py-1 text-sm text-zinc-300"
+						>
+							{item}
+						</span>
+					</li>
+				{/each}
+			</ul>
+		</section>
+
+		<section class="mt-14 rounded-lg border border-zinc-800 bg-zinc-900/50 p-5">
+			<h2 class="text-sm font-semibold text-white">Verify the download</h2>
+			<p class="mt-2 text-sm text-zinc-400">
+				Compare the installer's SHA-256 hash with the value below:
+			</p>
+			<code class="mt-3 block overflow-x-auto rounded-md bg-zinc-950 p-3 text-xs text-zinc-300">
+				{checksum}
+			</code>
+			<p class="mt-3 text-sm text-zinc-400">
+				<a
+					href={releaseUrl}
+					class="text-amber-400 underline decoration-amber-600 underline-offset-2 hover:decoration-amber-400"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Release notes and checksums
+				</a>
+			</p>
+		</section>
+
+		<footer class="mt-16 border-t border-zinc-800 pt-6">
+			<a
+				href="/"
+				class="text-sm text-zinc-400 underline decoration-zinc-700 underline-offset-4 transition hover:text-white hover:decoration-zinc-400"
+			>
+				← Back to home
+			</a>
+		</footer>
+	</div>
+</main>
