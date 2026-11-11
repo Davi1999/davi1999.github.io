@@ -1,11 +1,11 @@
 <script lang="ts">
-	const version = '1.2.0';
+	const version = '1.2.1';
 	const releaseTag = `dashboard-me-v${version}`;
 	const releaseBase = `https://github.com/Davi1999/davi1999.github.io/releases/download/${releaseTag}`;
 	const releaseUrl = `https://github.com/Davi1999/davi1999.github.io/releases/tag/${releaseTag}`;
 
-	const windowsInstaller = 'dashboard-me_1.2.0_x64-setup.exe';
-	const macInstaller = 'dashboard-me_1.2.0_universal.dmg';
+	const windowsInstaller = 'dashboard-me_1.2.1_x64-setup.exe';
+	const macInstaller = 'dashboard-me_1.2.1_universal.dmg';
 
 	const downloads = [
 		{
@@ -14,7 +14,7 @@
 			file: windowsInstaller,
 			url: `${releaseBase}/${windowsInstaller}`,
 			meta: 'Windows 10/11 64-bit · 3.9 MB',
-			hash: '6d514b70b98b9a468ef3e76e4d7a7dcb642eee35e77f11672a01bedd0665ccae',
+			hash: '6df6b2545a09763ecf0e4a5ad757136429dd6e430832c75f13f2ccd28976be39',
 			primary: true
 		},
 		{
@@ -23,7 +23,7 @@
 			file: macInstaller,
 			url: `${releaseBase}/${macInstaller}`,
 			meta: 'macOS 11+ · Intel + Apple Silicon · 12.5 MB',
-			hash: '165f6abf872750de8f5e323be4070a93a45cd997fa9a33e78811da34922bada3',
+			hash: '4156ec0a307ccae9738619385a09bc37102361191d6e20d87d45c2ec1c4ec269',
 			primary: false
 		}
 	];
@@ -95,7 +95,9 @@
 				</div>
 			{/each}
 		</div>
-		<p class="mt-3 text-sm text-zinc-500">v{version} · Both builds are unsigned.</p>
+		<p class="mt-3 text-sm text-zinc-500">
+			v{version} · Both builds are unsigned · 1.2.1 fixes the macOS startup issue.
+		</p>
 
 		<figure class="mt-10">
 			<img
