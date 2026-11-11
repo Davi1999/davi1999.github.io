@@ -178,8 +178,8 @@
 				</li>
 			</ol>
 			<p class="mt-4 text-sm text-zinc-400">
-				Requires macOS 11 Big Sur or later. The DMG is a universal build for Intel and Apple Silicon
-				and is ad-hoc signed, not notarised.
+				macOS support is in beta. Requires macOS 11 Big Sur or later. The DMG is a universal build
+				for Intel and Apple Silicon and is ad-hoc signed, not notarised.
 			</p>
 		</section>
 
