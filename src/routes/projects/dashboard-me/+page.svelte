@@ -1,15 +1,38 @@
 <script lang="ts">
-	const version = '1.1.2';
-	const installer = 'dashboard-me_1.1.2_x64-setup.exe';
-	const downloadUrl = `https://github.com/Davi1999/davi1999.github.io/releases/download/dashboard-me-v${version}/${installer}`;
-	const releaseUrl = `https://github.com/Davi1999/davi1999.github.io/releases/tag/dashboard-me-v${version}`;
-	const checksum = '7f29378f55962c40f30f39e75faefc9a11e0b5bbe42a4d82f93b168380dfddb9';
+	const version = '1.2.0';
+	const releaseTag = `dashboard-me-v${version}`;
+	const releaseBase = `https://github.com/Davi1999/davi1999.github.io/releases/download/${releaseTag}`;
+	const releaseUrl = `https://github.com/Davi1999/davi1999.github.io/releases/tag/${releaseTag}`;
+
+	const windowsInstaller = 'dashboard-me_1.2.0_x64-setup.exe';
+	const macInstaller = 'dashboard-me_1.2.0_universal.dmg';
+
+	const downloads = [
+		{
+			platform: 'Windows',
+			label: 'Download for Windows',
+			file: windowsInstaller,
+			url: `${releaseBase}/${windowsInstaller}`,
+			meta: 'Windows 10/11 64-bit · 3.9 MB',
+			hash: '6d514b70b98b9a468ef3e76e4d7a7dcb642eee35e77f11672a01bedd0665ccae',
+			primary: true
+		},
+		{
+			platform: 'macOS',
+			label: 'Download for macOS',
+			file: macInstaller,
+			url: `${releaseBase}/${macInstaller}`,
+			meta: 'macOS 11+ · Intel + Apple Silicon · 12.5 MB',
+			hash: '165f6abf872750de8f5e323be4070a93a45cd997fa9a33e78811da34922bada3',
+			primary: false
+		}
+	];
 
 	const features = [
 		'Weather with hourly and daily forecasts, powered by Open-Meteo',
 		'Now Playing with Windows media session artwork and playback controls',
 		'Football scores and league tables through SportScore or 5DollarFootballAPI',
-		'World Clock for any city, Quick Links, and app shortcuts with real Windows icons',
+		'World Clock for any city, Quick Links, and app shortcuts with real app icons',
 		'An editable notes widget and a looping YouTube video player',
 		'Draggable, resizable layout with saved themes, background images and per-widget settings'
 	];
@@ -21,7 +44,7 @@
 	<title>dashboard-me | David Jennings</title>
 	<meta
 		name="description"
-		content="dashboard-me is a customizable Windows dashboard for weather, media, football, notes, links and app shortcuts."
+		content="dashboard-me is a customizable Windows and macOS dashboard for weather, media, football, notes, links and app shortcuts."
 	/>
 </svelte:head>
 
@@ -44,7 +67,7 @@
 			/>
 			<div>
 				<p class="text-xs font-medium tracking-wider text-amber-400 uppercase">
-					Windows desktop app
+					Windows + macOS desktop app
 				</p>
 				<h1 class="mt-1 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
 					dashboard-me
@@ -56,17 +79,23 @@
 			</div>
 		</header>
 
-		<div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-			<a
-				href={downloadUrl}
-				class="inline-flex items-center justify-center rounded-lg bg-amber-400 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-amber-300"
-			>
-				Download for Windows
-			</a>
-			<p class="text-sm text-zinc-500">
-				v{version} · Windows 10/11 64-bit · 3.8 MB
-			</p>
+		<div class="mt-8 grid gap-3 sm:grid-cols-2">
+			{#each downloads as download}
+				<div class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
+					<a
+						href={download.url}
+						class={download.primary
+							? 'inline-flex w-full items-center justify-center rounded-lg bg-amber-400 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-amber-300'
+							: 'inline-flex w-full items-center justify-center rounded-lg border border-zinc-600 bg-zinc-800 px-5 py-3 text-sm font-semibold text-white transition hover:border-zinc-400 hover:bg-zinc-700'}
+					>
+						{download.label}
+					</a>
+					<p class="mt-3 text-xs text-zinc-500">{download.meta}</p>
+					<p class="mt-1 text-xs break-all text-zinc-600">{download.file}</p>
+				</div>
+			{/each}
 		</div>
+		<p class="mt-3 text-sm text-zinc-500">v{version} · Both builds are unsigned.</p>
 
 		<figure class="mt-10">
 			<img
@@ -94,14 +123,20 @@
 					</li>
 				{/each}
 			</ul>
+			<p class="mt-4 text-sm text-zinc-400">
+				Now Playing is Windows-only. macOS does not expose global media sessions to desktop apps, so
+				the widget shows an unavailable state there. Every other widget works on both platforms.
+			</p>
 		</section>
 
 		<section class="mt-14" aria-labelledby="install-heading">
 			<h2 id="install-heading" class="text-sm font-medium tracking-wider text-zinc-500 uppercase">
 				Install
 			</h2>
-			<ol class="mt-4 list-decimal space-y-2 pl-5 text-sm text-zinc-300">
-				<li>Download <code class="text-zinc-100">{installer}</code>.</li>
+
+			<h3 class="mt-5 text-sm font-semibold text-white">Windows</h3>
+			<ol class="mt-3 list-decimal space-y-2 pl-5 text-sm text-zinc-300">
+				<li>Download <code class="text-zinc-100">{windowsInstaller}</code>.</li>
 				<li>
 					Run the installer. It installs for the current Windows user and does not need
 					administrator rights.
@@ -119,6 +154,21 @@
 				dashboard-me uses Microsoft Edge WebView2. Windows 11 and current Windows 10 include it; the
 				installer downloads it if it is missing, so the first install needs an internet connection.
 			</p>
+
+			<h3 class="mt-8 text-sm font-semibold text-white">macOS</h3>
+			<ol class="mt-3 list-decimal space-y-2 pl-5 text-sm text-zinc-300">
+				<li>Download <code class="text-zinc-100">{macInstaller}</code> and open it.</li>
+				<li>Drag <strong class="text-white">dashboard-me</strong> to Applications.</li>
+				<li>
+					Launch the app. If Gatekeeper blocks it, right-click the app, choose
+					<strong class="text-white">Open</strong>, then confirm
+					<strong class="text-white">Open</strong> once.
+				</li>
+			</ol>
+			<p class="mt-4 text-sm text-zinc-400">
+				Requires macOS 11 Big Sur or later. The DMG is a universal build for Intel and Apple Silicon
+				and is ad-hoc signed, not notarised.
+			</p>
 		</section>
 
 		<section class="mt-14" aria-labelledby="data-heading">
@@ -127,13 +177,19 @@
 			</h2>
 			<p class="mt-4 text-sm text-zinc-400">
 				There is no account and no telemetry. Layout, theme, notes and widget settings are stored
-				locally under <code class="text-zinc-200">%APPDATA%\com.davi1999.dashboardme</code>. An
-				optional 5DollarFootballAPI key is kept in Windows Credential Manager, not in the dashboard
-				file.
+				locally under <code class="text-zinc-200">%APPDATA%\com.davi1999.dashboardme</code> on
+				Windows and
+				<code class="text-zinc-200">~/Library/Application Support/com.davi1999.dashboardme</code>
+				on macOS.
 			</p>
 			<p class="mt-3 text-sm text-zinc-400">
-				Weather, football, quotes and YouTube playback require an internet connection. The app is
-				built from a private source repository; this page distributes the compiled installer only.
+				An optional 5DollarFootballAPI key is kept in Windows Credential Manager or macOS Keychain,
+				not in the dashboard file. Weather, football, quotes and YouTube playback require an
+				internet connection.
+			</p>
+			<p class="mt-3 text-sm text-zinc-400">
+				The app is built from a private source repository; this page distributes the compiled
+				installers only.
 			</p>
 		</section>
 
@@ -155,14 +211,23 @@
 		</section>
 
 		<section class="mt-14 rounded-lg border border-zinc-800 bg-zinc-900/50 p-5">
-			<h2 class="text-sm font-semibold text-white">Verify the download</h2>
+			<h2 class="text-sm font-semibold text-white">Verify the downloads</h2>
 			<p class="mt-2 text-sm text-zinc-400">
-				Compare the installer's SHA-256 hash with the value below:
+				Compare each file's SHA-256 hash with the values below:
 			</p>
-			<code class="mt-3 block overflow-x-auto rounded-md bg-zinc-950 p-3 text-xs text-zinc-300">
-				{checksum}
-			</code>
-			<p class="mt-3 text-sm text-zinc-400">
+			<div class="mt-3 space-y-4">
+				{#each downloads as download}
+					<div>
+						<p class="text-xs font-medium text-zinc-400">{download.platform}</p>
+						<code
+							class="mt-1 block overflow-x-auto rounded-md bg-zinc-950 p-3 text-xs text-zinc-300"
+						>
+							{download.hash}
+						</code>
+					</div>
+				{/each}
+			</div>
+			<p class="mt-4 text-sm text-zinc-400">
 				<a
 					href={releaseUrl}
 					class="text-amber-400 underline decoration-amber-600 underline-offset-2 hover:decoration-amber-400"

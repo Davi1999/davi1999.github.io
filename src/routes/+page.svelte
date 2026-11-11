@@ -11,7 +11,7 @@
 			name: 'dashboard-me',
 			href: '/projects/dashboard-me',
 			description:
-				'A customizable Windows dashboard for weather, media, football, notes, links and app shortcuts.',
+				'A customizable Windows and macOS dashboard for weather, media, football, notes, links and app shortcuts.',
 			external: false
 		},
 		{
